@@ -59,6 +59,8 @@ public class ColorFragment extends Fragment implements View.OnClickListener {
 
         f.setBackgroundColor(color);
 
+        //get a reference to MainActivity:
+
         listener.onColorChanged(color);
 
     }

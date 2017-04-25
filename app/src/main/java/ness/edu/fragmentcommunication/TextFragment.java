@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -16,25 +17,34 @@ import android.view.ViewGroup;
  * to handle interaction events.
  */
 public class TextFragment extends Fragment {
-
+    private TextView tvHello;
     private OnTextChangedListener mListener;
-
-    public TextFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_text, container, false);
+        View v = inflater.inflate(R.layout.fragment_text, container, false);
+        tvHello = (TextView) v.findViewById(R.id.tvHello);
+        return v;
     }
 
-    public void onTextChanged(String text) {
-        if (mListener != null) {
-            mListener.onTextChanged(text);
-        }
+    public void setTextColor(int color) {
+        tvHello.setTextColor(color);
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnTextChangedListener {
+        void onTextChanged(String text);
     }
 
     @Override
@@ -54,17 +64,11 @@ public class TextFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnTextChangedListener {
-        void onTextChanged(String text);
+
+    public void onTextChanged(String text) {
+        if (mListener != null) {
+            mListener.onTextChanged(text);
+        }
     }
+
 }
